@@ -11,4 +11,4 @@ Echoe.new('scope-builder', '0.1.2') do |p|
   p.ignore_pattern = ["script/*", "**/*.sqlite3"]
 end
 
-Dir["#{File.dirname(__FILE__)}/tasks/*.rake"].sort.each { |ext| load ext }
+Dir["#{File.dirname(__FILE__)}/scope_builder_tasks/*.rake"].sort.each { |ext| load ext }
