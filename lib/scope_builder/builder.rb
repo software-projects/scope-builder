@@ -6,7 +6,7 @@ module ScopeBuilder
     
     def method_missing(method, *args, &block)
       result = @proxy_scope.send(method, *args, &block)
-      if result.class == ActiveRecord::NamedScope::Scope
+      if result.class == ActiveRecord::Relation
         @proxy_scope = result
         self
       else
