@@ -16,6 +16,6 @@ class ActiveRecord::Associations::AssociationProxy
   include ScopeBuilder::ModelAdditions
 end
 
-class ActiveRecord::NamedScope::Scope
+class ActiveRecord::Relation
   include ScopeBuilder::ModelAdditions
 end
