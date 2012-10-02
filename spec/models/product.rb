@@ -1,5 +1,5 @@
 class Product < ActiveRecord::Base
-  named_scope :released, :conditions => ['released=?', true]
+  scope :released, :conditions => ['released=?', true]
   belongs_to :category
 end
 

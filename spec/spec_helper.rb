@@ -1,5 +1,5 @@
 require 'rubygems'
-require 'spec'
+require 'rspec'
 require 'active_support'
 require 'active_record'
 require File.dirname(__FILE__) + '/../lib/scope_builder.rb'
@@ -7,7 +7,7 @@ require File.dirname(__FILE__) + '/../lib/scope_builder.rb'
 # setup database adapter
 ActiveRecord::Base.establish_connection({
   :adapter => "sqlite3",
-  :dbfile => File.dirname(__FILE__) + "/test.sqlite3"
+  :database => File.dirname(__FILE__) + "/test.sqlite3"
 })
 
 # load models
@@ -17,6 +17,6 @@ require File.dirname(__FILE__) + '/models/product.rb'
 CreateCategories.migrate(:up) unless Category.table_exists?
 CreateProducts.migrate(:up) unless Product.table_exists?
 
-Spec::Runner.configure do |config|
+RSpec.configure do |config|
   config.mock_with :mocha
 end
