@@ -9,18 +9,29 @@ describe ScopeBuilder::Builder do
     
     @builder = Product.scope_builder
   end
+
+  class ActiveRecord::Relation
+    def equivalent_to?(other)
+      return false unless SINGLE_VALUE_METHODS.all? do |method|
+        send("#{method}_value") == other.send("#{method}_value")
+      end
+      (ASSOCIATION_METHODS + MULTI_VALUE_METHODS).all? do |method|
+        send("#{method}_values") == other.send("#{method}_values")
+      end
+    end
+  end
   
   it "should start with empty proxy options" do
-    @builder.proxy_options.should == {}
+    @builder.should be_equivalent_to Product.where({})
   end
   
   it "should allow named scopes to be called through it" do
-    @builder.released.proxy_options.should == Product.released.proxy_options
+    @builder.released.should be_equivalent_to Product.released
   end
   
   it "should remember scope calls" do
     @builder.released
-    @builder.proxy_options.should == Product.released.proxy_options
+    @builder.should be_equivalent_to Product.released
   end
   
   it "should build up scopes" do
